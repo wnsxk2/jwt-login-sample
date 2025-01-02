@@ -1,0 +1,23 @@
+FROM postgres:14
+
+# 이미지 환경변수들 세팅
+# 실전에서는 비밀번호 등을 이곳에 입력하지 말 것!
+# 서버의 환경변수 등을 활용하세요.
+
+ENV POSTGRES_USER postgres
+ENV POSTGRES_PASSWORD 1234
+ENV POSTGRES_DB postgres
+
+# 도커 환경에서 컨테이너 생성 시 스크립트를 실행하는 폴더로
+# 미리 작성된 스크립트들을 이동
+
+COPY ./scripts/ /docker-entrypoint-initdb.d/
+
+# 이미지 빌드 명령어 (현 파일과 같은 디렉토리에서)
+# docker build -t {이미지명} .
+
+# 실행 명령어 (터미널에 로그 찍히는 것 보기)
+# docker run --name {컨테이너명} -it -p 4903:5432 {이미지명}
+
+# 실행 명령어 (데몬으로 실행)
+# docker run --name {컨테이너명} -p 4903:5432 -d {이미지명}
