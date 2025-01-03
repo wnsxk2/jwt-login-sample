@@ -9,14 +9,12 @@ CREATE TABLE users (
 CREATE TABLE tokens (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    device_id VARCHAR(255) NOT NULL, -- 기기 식별자
-    access_token TEXT NOT NULL,
+    uuid VARCHAR(255) NOT NULL, -- 기기 식별자
     refresh_token TEXT NOT NULL,
-    access_token_expires_at TIMESTAMP NOT NULL,
     refresh_token_expires_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
-    UNIQUE(user_id, device_id) -- 동일 사용자와 기기에 대해 중복 방지
+    UNIQUE(user_id, uuid) -- 동일 사용자와 기기에 대해 중복 방지
 );
 
 CREATE TABLE social_logins (
