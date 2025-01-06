@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService {
     public UserVO getAllUsers() {
         return userMapper.selectAllUsers();
     }
+
+    @Override
+    public void addUser(UserVO createUser) {
+        return userMapper.insertUser(createUser);
+    }
 }

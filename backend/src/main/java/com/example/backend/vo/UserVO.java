@@ -8,10 +8,10 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public class UserVO {
-    private int id;
-    private String email;
-    private String passwordHash;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private String token;
+    private String username;
+    private String password;
+    
+    private String id;
 
 }
