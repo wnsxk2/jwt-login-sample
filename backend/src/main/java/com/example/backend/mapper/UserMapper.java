@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 
     public UserVO selectAllUsers();
-
     public void insertUser(UserVO user);
+    public UserVO findByUsernameAndPassword(UserVO user);
+    public void saveRefreshToken(UserVO user);
+    public String getRefreshToken(UserVO user);
 }

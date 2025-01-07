@@ -17,7 +17,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(UserVO createUser) {
-        return userMapper.insertUser(createUser);
+    public void create(UserVO user) {
+        userMapper.insertUser(user);
+    }
+
+    @Override
+    public UserVO getByCredentials(UserVO user) {
+        return userMapper.findByUsernameAndPassword(user);
+    }
+
+    @Override
+    public void saveToken(UserVO user) {
+        userMapper.saveRefreshToken(user);
+    }
+
+    @Override
+    public String getToken(UserVO user) {
+        return userMapper.getRefreshToken(user);
     }
 }

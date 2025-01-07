@@ -7,7 +7,15 @@
         FROM users
     </select>
 
-    <insert id="insertUser">
-        INSERT INTO user(username, )
+    <insert id="insertUser" parameterType="com.example.backend.vo.UserVO">
+        INSERT INTO users(username, password)
+        VALUES(#{username}, #{password});
     </insert>
+
+    <select id="findByUsernameAndPassword" parameterType="com.example.backend.vo.UserVO" resultType="com.example.backend.vo.UserVO">
+        SELECT *
+        FROM users
+        WHERE username = #{username}
+        AND password = #{password}
+    </select>
 </mapper>
