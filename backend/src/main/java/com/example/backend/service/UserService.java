@@ -8,4 +8,5 @@ public interface UserService {
     public UserVO getByCredentials(UserVO user);
     public void saveToken(UserVO user);
     public String getToken(UserVO user);
+    public String signIn(UserVO user);
 }

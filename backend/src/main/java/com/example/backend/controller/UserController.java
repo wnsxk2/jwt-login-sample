@@ -24,59 +24,28 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-//    @RequestMapping(path = "/signup", method = RequestMethod.POST)
-//    public ResponseEntity<?> registerUser(@RequestBody UserVO user) {
-//        try{
-//            if(user == null || user.getPassword() == null){
-//                throw new Exception();
-//            }
-//            UserVO createUser = new UserVO();
-//            createUser.setUsername(user.getUsername());
-//            createUser.setPassword(user.getPassword());
-//
-//            userService.create(createUser);
-//            return ResponseEntity.ok().body(createUser);
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
+    @RequestMapping(path = "/signup", method = RequestMethod.POST)
+    public ResponseEntity<?> registerUser(@RequestBody UserVO user) {
+        try{
+            if(user == null || user.getPassword() == null){
+                throw new Exception();
+            }
+            userService.create(user);
+            return ResponseEntity.ok().body(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
     @RequestMapping(path = "/signin", method = RequestMethod.POST)
     public ResponseEntity<?> loginUser(@RequestBody UserVO loginUser) {
-//        try{
-//            // signin 입력 값 확인
-//            if(user == null || user.getPassword() == null){
-//                throw new Exception();
-//            }
-//
-//            // 회원 확인
-//            UserVO signinUser = userService.getByCredentials(user);
-//
-//            if(signinUser != null){
-//                // token 생성
-//                String token = tokenProvider.generateToken(signinUser);
-//                signinUser.setToken(token);
-//                return ResponseEntity.ok().body(signinUser);
-//            } else {
-//                // 회원이 없는 경우
-//                return ResponseEntity.badRequest().body("Invalid credentials");
-//            }
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
 
-        UserVO user = userService.getByCredentials(loginUser);
-        if(user == null){
+        String token = userService.signIn(loginUser);
+        if(token == null){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
-        // jwt 토큰 생성
-        String accessToken = tokenProvider.generateToken(user);
-        String refreshToken = tokenProvider.generateToken(user);
-
         // token 정보 db 저장 로직
-        user.setToken(accessToken);
 
-        return ResponseEntity.ok().body(user);
+        return ResponseEntity.ok().body(token);
     }
 }
