@@ -24,22 +24,22 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @RequestMapping(path = "/signup", method = RequestMethod.POST)
-    public ResponseEntity<?> registerUser(@RequestBody UserVO user) {
-        try{
-            if(user == null || user.getPassword() == null){
-                throw new Exception();
-            }
-            UserVO createUser = new UserVO();
-            createUser.setUsername(user.getUsername());
-            createUser.setPassword(user.getPassword());
-
-            userService.create(createUser);
-            return ResponseEntity.ok().body(createUser);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+//    @RequestMapping(path = "/signup", method = RequestMethod.POST)
+//    public ResponseEntity<?> registerUser(@RequestBody UserVO user) {
+//        try{
+//            if(user == null || user.getPassword() == null){
+//                throw new Exception();
+//            }
+//            UserVO createUser = new UserVO();
+//            createUser.setUsername(user.getUsername());
+//            createUser.setPassword(user.getPassword());
+//
+//            userService.create(createUser);
+//            return ResponseEntity.ok().body(createUser);
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//    }
 
     @RequestMapping(path = "/signin", method = RequestMethod.POST)
     public ResponseEntity<?> loginUser(@RequestBody UserVO loginUser) {

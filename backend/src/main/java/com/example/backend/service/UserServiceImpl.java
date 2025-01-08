@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.vo.UserVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserVO getAllUsers() {
@@ -18,12 +20,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void create(UserVO user) {
+        // DB 저장 비밀번호 암호화
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userMapper.insertUser(user);
     }
 
     @Override
     public UserVO getByCredentials(UserVO user) {
-        return userMapper.findByUsernameAndPassword(user);
+        return userMapper.findByUsername(user.getUsername());
     }
 
     @Override

@@ -12,10 +12,9 @@
         VALUES(#{username}, #{password});
     </insert>
 
-    <select id="findByUsernameAndPassword" parameterType="com.example.backend.vo.UserVO" resultType="com.example.backend.vo.UserVO">
+    <select id="findByUsername" parameterType="string" resultType="com.example.backend.vo.UserVO">
         SELECT *
         FROM users
         WHERE username = #{username}
-        AND password = #{password}
     </select>
 </mapper>

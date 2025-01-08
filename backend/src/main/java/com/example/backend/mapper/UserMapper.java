@@ -8,7 +8,7 @@ public interface UserMapper {
 
     public UserVO selectAllUsers();
     public void insertUser(UserVO user);
-    public UserVO findByUsernameAndPassword(UserVO user);
+    public UserVO findByUsername(String username);
     public void saveRefreshToken(UserVO user);
     public String getRefreshToken(UserVO user);
 }
