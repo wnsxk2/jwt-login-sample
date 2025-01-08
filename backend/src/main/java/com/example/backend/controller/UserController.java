@@ -3,14 +3,9 @@ package com.example.backend.controller;
 import com.example.backend.security.TokenProvider;
 import com.example.backend.service.UserService;
 import com.example.backend.vo.UserVO;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +17,6 @@ public class UserController {
 
     private final UserService userService;
     private final TokenProvider tokenProvider;
-    private final AuthenticationManager authenticationManager;
 
     @RequestMapping(path = "/test", method = RequestMethod.GET)
     public ResponseEntity<?> getAllUsers() {
