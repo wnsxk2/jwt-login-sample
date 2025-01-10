@@ -65,6 +65,13 @@ public class UserServiceImpl implements UserService {
         // token 생성
         String accessToken = TokenProvider.generateToken(member);
 
+
         return accessToken;
+    }
+
+    private void createRefreshToken(UserVO user) {
+        // 
+        String refreshToken = TokenProvider.generateToken(user);
+        // refreshToken DB 저장
     }
 }

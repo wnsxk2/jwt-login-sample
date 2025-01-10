@@ -44,6 +44,19 @@ public class UserController {
         if(token == null){
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+
+        return ResponseEntity.ok().body(token);
+    }
+
+    @RequestMapping(path = "/refresh", method = RequestMethod.POST)
+    public ResponseEntity<?> createRefreshToken(@RequestBody Object token) {
+        // refresh token 확인
+        // refresh token 재발행
+        // 리턴
+        // String token = ;
+        if(token == null){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
         // token 정보 db 저장 로직
 
         return ResponseEntity.ok().body(token);
